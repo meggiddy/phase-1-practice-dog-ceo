@@ -13,33 +13,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
       fetch("https://dog.ceo/api/breeds/list")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           // data.message is an array of all available breeds
           const breedList = data.message;
           const dropDown = document.getElementById("breed-dropdown");
           breedList.forEach((breed) => {
-            const option = document.createElement("option");
-            option.value = breed;
-            option.innerHTML = breed;
-            dropDown.appendChild(option);
-          });
-          dropDown.addEventListener("change", (event) => {
-            const selectedBreed = event.target.value;
-            const imgUrl = `https://dog.ceo/api/breed/${selectedBreed}/images/random/4`;
-            fetch(imgUrl)
-              .then((response) => response.json())
-              .then((data) => {
+            const listItem = document.createElement("li");
+            const dogList = document.getElementById("dog-breeds");
+            const dropDown = document.getElementById("breed-dropdown");
+            //filter with first letter
+            breedList.forEach((breed) => {
+              const firstOption = document.getElementsByTagName("option");
+              if (breed.charAt(0) === firstOption.value) {
+                const img = document.createElement("img");
                 const imgDiv = document.getElementById("dog-image-container");
-                while (imgDiv.firstChild) {
-                  imgDiv.removeChild(imgDiv.firstChild);
-                }
-                const imageUrls = data.message;
-                imageUrls.forEach((url) => {
-                  const img = document.createElement("img");
-                  img.src = url;
-                  imgDiv.appendChild(img);
-                });
-              });
+                    img.src = `https://dog.ceo/api/breed/${breed}/images/random`;
+                    imgDiv.appendChild(img);
+                    dogList.appendChild(img);
+                listItem.innerHTML = breed;
+                //dogList.removeChild(listItem);
+                dogList.appendChild(listItem);
+              }
+            });
+            listItem.innerHTML = breed;
+            dogList.appendChild(listItem);
           });
         });
     });

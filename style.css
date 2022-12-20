@@ -1,0 +1,19 @@
+#dog-image-container{
+    display: flex;
+    float: right;
+    width: 1200px;
+}
+#dog-breeds{
+    width: 180px;
+    display: block;
+    float: left;
+}
+img{
+    width: 200px;
+    height: 200px;
+}
+label{
+    margin-left: -200px;
+    left: 0;
+    position: relative;
+}
