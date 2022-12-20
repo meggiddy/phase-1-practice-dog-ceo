@@ -17,3 +17,7 @@ label{
     left: 0;
     position: relative;
 }
+#breed{
+    list-style: none;
+    cursor: pointer;
+}

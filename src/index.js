@@ -19,8 +19,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
     dogList.innerHTML = "";
     breeds.forEach((dog) => {
       const listItem = document.createElement("li");
+      listItem.id = "breed";
       listItem.innerHTML = dog;
       dogList.appendChild(listItem);
+
+      listItem.addEventListener("click", () => {
+        listItem.style.color = "red";
+        const imgUrl = `https://dog.ceo/api/breed/${dog}/images/random/4`;
+        fetch(imgUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            data.message.forEach((imgUrl) => {
+              imgDiv.innerHTML = "";
+              const img = document.createElement("img");
+              img.setAttribute("src", imgUrl);
+              imgDiv.appendChild(img);
+            });
+          });
+      });
     });
   };
 
